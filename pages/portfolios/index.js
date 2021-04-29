@@ -1,6 +1,7 @@
 import axios from 'axios'
 import Link from 'next/link'
 import BaseLayout from '../../components/layouts/BaseLayout'
+import BasePage from '../../components/BasePage'
 const Portfolio = ({ posts }) => {
 
     const renderPosts = () => {
@@ -20,10 +21,12 @@ const Portfolio = ({ posts }) => {
 
     return (
         <BaseLayout>
+        <BasePage>
             <h1>I am Portfolio</h1>
             <ul>
                 {renderPosts()}
             </ul>
+            </BasePage>
         </BaseLayout>
     )
 }

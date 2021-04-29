@@ -1,14 +1,83 @@
-import Link from 'next/link'
+import React, { useState } from 'react';
+import Link from 'next/link';
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  Nav,
+  NavItem
+} from 'reactstrap';
+
+
+const BsNavLink = props => {
+  const { href, title } = props;
+  return (
+    <Link href={href}>
+      <a className="nav-link port-navbar-link">{title}</a>
+    </Link>
+  )
+}
+
+const LoginLink = () => {
+  return (
+    <span className="nav-link port-navbar-link">Login</span>
+  )
+}
+const LoginOut = () => {
+  return (
+    <span className="nav-link port-navbar-link">Logout</span>
+
+  )
+}
+
+
 
 const Header = () => {
-    return (
-     <>
-        <Link href = "/"> Home </Link>
-        <Link href = "/about"> About </Link>
-        <Link href = "/cv"> CV </Link>
-        <Link href = "/blogs"> Blogs </Link>
-        <Link href = "/portfolios"> Portfolio </Link>
-     </>
-    )
-  }
-  export default Header
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
+
+  return (
+    <div>
+      <Navbar
+        className="port-navbar port-default absolute"
+        color="transparent"
+        dark
+        expand="md">
+        <div className="navbar-brand">
+          <Link href="/">
+            <a className="port-navbar-brand">Erikson Santos</a>
+          </Link>
+        </div>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="mr-auto" navbar>
+            <NavItem className="port-navbar-item">
+              <BsNavLink href="/" title="Home" />
+            </NavItem>
+            <NavItem className="port-navbar-item">
+              <BsNavLink href="/about" title="About" />
+            </NavItem>
+            <NavItem className="port-navbar-item">
+              <BsNavLink href="/portfolios" title="Portfolios" />
+            </NavItem>
+            <NavItem className="port-navbar-item">
+              <BsNavLink href="/blogs" title="Blogs" />
+            </NavItem>
+            <NavItem className="port-navbar-item">
+              <BsNavLink href="/cv" title="Cv" />
+            </NavItem>
+
+          </Nav>
+          <NavItem className="port-navbar-item clickable">
+            <LoginLink></LoginLink>
+          </NavItem>
+          <NavItem className="port-navbar-item clickable">
+            <LoginOut></LoginOut>
+          </NavItem>
+
+        </Collapse>
+      </Navbar>
+    </div>
+  );
+}
+export default Header
