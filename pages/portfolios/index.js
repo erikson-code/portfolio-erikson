@@ -1,73 +1,56 @@
 
-import { useEffect } from 'react'
-import axios from 'axios'
+
 import Link from 'next/link'
 import BaseLayout from '../../components/layouts/BaseLayout'
 import BasePage from '../../components/BasePage'
+import {useGetData} from '../../actions'
 
+const Portfolio = () => {
 
-
-const Portfolio = ({ posts }) => {
-
-    useEffect(() => {
-
-        async function getPost(){
-            const res = await fetch("/api/v1/posts")
-            const data =  await res.json()
-            
-    
-        }
-
-        getPost()
-
-    }, [])
+    const {data,error,loading} = useGetData("/api/v1/posts")
 
 
     const renderPosts = () => {
+        const post = data.posts
+        
+        if (post != undefined) {
+            return post.map(post =>
+                <li key={post.id}>
+                    <Link href={`/portfolios/${post.id}`}>
+                        <a>c
+                <span style={{ color: "white" }}> {post.title}</span>
+                        </a>
+                    </Link>
 
-        return posts.map(post =>
-            <li key={post.id}>
-                <Link href={`/portfolios/${post.id}`}>
-                    <a>c
-                {post.title}
-                    </a>
-                </Link>
+                </li>
 
-            </li>
-
-        )
+            )
+        }
     }
 
     return (
         <BaseLayout>
             <BasePage>
                 <h1>I am Portfolio</h1>
-                <ul>
-                    {renderPosts()}
+                {loading &&
+                    <p>Loading data ...</p>
+                }
+               {data &&
+                    <ul>
+                    {renderPosts(data)}
                 </ul>
+               }
+               {
+                   error &&
+
+                   <div className = "alert alert-danger">{error.message}</div>
+               }
             </BasePage>
         </BaseLayout>
     )
 }
 
 
-Portfolio.getInitialProps = async () => {
 
-    let posts = []
-
-    try {
-
-        const res = await axios.get("http://jsonplaceholder.typicode.com/posts")
-        posts = res.data
-
-    } catch (e) {
-
-        console.error(e)
-
-    }
-    return { posts: posts.slice(0, 10) }
-
-
-}
 
 export default Portfolio

@@ -4,10 +4,10 @@ export default async (req, res) => {
 
     try {
 
-        const axiosRes = await axios.get(`http://jsonplaceholder.typicode.com/posts`)
-        const posts = axiosRes.data
+        const axiosRes = await axios.get(`http://jsonplaceholder.typicode.com/posts/${req.query.id}`)
+        const post = axiosRes.data
 
-        res.status(200).json({posts: posts.slice(0,10)})
+        res.status(200).json(post)
 
     }
     catch (e) {
@@ -18,4 +18,3 @@ export default async (req, res) => {
 
   
 }
-
