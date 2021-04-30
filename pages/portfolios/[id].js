@@ -30,7 +30,6 @@ const Portfolio = ({portfolio}) => {
 Portfolio.getInitialProps = async ({query})=>{
 
     let post = {}
-    debugger
     try{
 
         const res = await axios.get(`http://jsonplaceholder.typicode.com/posts/${query.id}`)
@@ -40,7 +39,6 @@ Portfolio.getInitialProps = async ({query})=>{
     catch(e){
         console.error(e)
     }
-    debugger
 
     return {
         portfolio: post}
