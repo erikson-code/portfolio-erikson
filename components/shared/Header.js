@@ -19,10 +19,16 @@ const BsNavLink = props => {
 }
 
 const LoginLink = () => {
+
   return (
-    <span className="nav-link port-navbar-link">Login</span>
+    <>
+      <a className="nav-link port-navbar-link" href="/api/v1/login">Login</a>
+      
+    </>
   )
+
 }
+
 const LoginOut = () => {
   return (
     <span className="nav-link port-navbar-link">Logout</span>

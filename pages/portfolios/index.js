@@ -10,6 +10,7 @@ const Portfolio = () => {
     const {data,error,loading} = useGetData("/api/v1/posts")
 
 
+
     const renderPosts = () => {
         const post = data.posts
         
