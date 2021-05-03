@@ -11,7 +11,7 @@ const Portfolio = () => {
 
     const [vData, getData] = useState()
     const [vError, getError] = useState()
-    const [vLoading, getLoading] = useState()
+    const [vLoading, getLoading] = useState(true)
 
 
     const auxPosts = async () => {
@@ -57,8 +57,11 @@ const Portfolio = () => {
 
             
                 <h1>I am Portfolio</h1>
-                {renderPosts()}
                
+                {renderPosts()}
+                {vLoading &&
+                <p>Loading data ...</p>
+                }
             </BasePage>
         </BaseLayout>
     )
