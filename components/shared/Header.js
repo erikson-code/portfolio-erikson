@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Link from 'next/link';
+import Link from 'next/link'
+import { signIn, signOut, useSession } from 'next-auth/client'
 import {
   Collapse,
   Navbar,
@@ -10,6 +11,8 @@ import {
 
 
 const BsNavLink = props => {
+
+
   const { href, title } = props;
   return (
     <Link href={href}>
@@ -18,29 +21,30 @@ const BsNavLink = props => {
   )
 }
 
-const LoginLink = () => {
-
-  return (
-    <>
-      <a className="nav-link port-navbar-link" href="/api/v1/login">Login</a>
-      
-    </>
-  )
-
-}
-
-const LoginOut = () => {
-  return (
-    <span className="nav-link port-navbar-link">Logout</span>
-
-  )
-}
-
-
 
 const Header = () => {
+
+  
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+
+  const [session, loading] = useSession()
+
+
+  const LoginOut = ({ onClick }) => {
+    return (
+      <a className="nav-link port-navbar-link" style={{ cursor: "pointer" }} onClick={() => onClick()}>Logout</a>
+
+    )
+
+  }
+  const LoginLink = ({ onClick }) => {
+    return (
+      <a className="nav-link port-navbar-link " style={{ cursor: "pointer" }} onClick={() => onClick()}>Login</a>
+
+    )
+
+  }
 
   return (
     <div>
@@ -51,7 +55,10 @@ const Header = () => {
         expand="md">
         <div className="navbar-brand">
           <Link href="/">
-            <a className="port-navbar-brand">Erikson Santos</a>
+            <a className="port-navbar-brand">
+              {session == undefined ? "" : session.user.name
+
+              }</a>
           </Link>
         </div>
         <NavbarToggler onClick={toggle} />
@@ -60,6 +67,7 @@ const Header = () => {
             <NavItem className="port-navbar-item">
               <BsNavLink href="/" title="Home" />
             </NavItem>
+
             <NavItem className="port-navbar-item">
               <BsNavLink href="/about" title="About" />
             </NavItem>
@@ -73,13 +81,31 @@ const Header = () => {
               <BsNavLink href="/cv" title="Cv" />
             </NavItem>
 
+            <NavItem className="port-navbar-item">
+              <BsNavLink href="/secret" title="Secret" />
+            </NavItem>
+
+
+
+
           </Nav>
-          <NavItem className="port-navbar-item clickable">
-            <LoginLink></LoginLink>
-          </NavItem>
-          <NavItem className="port-navbar-item clickable">
-            <LoginOut></LoginOut>
-          </NavItem>
+
+          {!session && <>
+            <NavItem className="port-navbar-item">
+              <LoginLink onClick={() => signIn("auth0")}></LoginLink>
+            </NavItem>
+          </>}
+          {session && <>
+            <NavItem className="port-navbar-item">
+              <LoginOut onClick={() => signOut()}></LoginOut>
+            </NavItem>
+          </>}
+
+
+
+
+
+
 
         </Collapse>
       </Navbar>
@@ -87,3 +113,5 @@ const Header = () => {
   );
 }
 export default Header
+
+

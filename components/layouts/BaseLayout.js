@@ -1,9 +1,9 @@
 import Header from '../shared/Header'
 const BaseLayout = (props) => {
-    const { className, children } = props
+    const { className, children,user } = props
     return (
         <div className="layout-container">
-            <Header />
+            <Header user = {user} />
 
             <main className={`cover ${className}`}>
                 <div className="wrapper">

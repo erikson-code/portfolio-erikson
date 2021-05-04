@@ -5,7 +5,6 @@ import BaseLayout from '../../components/layouts/BaseLayout'
 import BasePage from '../../components/BasePage'
 import { useGetData } from '../../actions'
 import { useState } from 'react'
-import posts from '../api/v1/posts'
 
 const Portfolio = () => {
 
@@ -15,7 +14,7 @@ const Portfolio = () => {
 
 
     const auxPosts = async () => {
-        const { data, error, loading } = await useGetData("http://localhost:3000/api/v1/posts")
+        const { data, error, loading } = await useGetData("http://localhost:3000/api/posts")
 
         if (data !== undefined && data.length !== 0) {
             getData(data)
@@ -48,11 +47,9 @@ const Portfolio = () => {
     }
 
 
-
-
     return (
 
-        <BaseLayout>
+        <BaseLayout >
             <BasePage>
 
             
