@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { signIn, signOut, useSession } from 'next-auth/client'
 import {
   Collapse,
@@ -24,16 +25,25 @@ const BsNavLink = props => {
 
 const Header = () => {
 
-  
+  const router = useRouter()
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
-  const [session, loading] = useSession()
+  const [session] = useSession()
 
 
   const LoginOut = ({ onClick }) => {
+
     return (
-      <a className="nav-link port-navbar-link" style={{ cursor: "pointer" }} onClick={() => onClick()}>Logout</a>
+      <a className="nav-link port-navbar-link" style={{ cursor: "pointer" }}
+
+        onClick={() => {
+
+          router.push("/")
+            .then(()=>onClick())
+
+        }
+        }>Logout</a>
 
     )
 

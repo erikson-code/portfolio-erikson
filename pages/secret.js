@@ -1,35 +1,21 @@
 import BaseLayout from '../components/layouts/BaseLayout'
 import BasePage from '../components/BasePage'
-import { useSession, signIn } from 'next-auth/client'
-import { useRouter } from 'next/router'
 
-const Secret = () => {
-  const [session, loading] = useSession()
-  const router = useRouter()
+import withAuth from '../hoc'
 
-  if (loading) {
-    return <p>Loading ...</p>
-  }
+const Secret = ({user,loading}) => {
+  debugger
+  return (
+    <BaseLayout>
+      <BasePage>
+        {
+          <h1>I am secret - {user}
 
-  if (session == null) {
-
-    signIn("auth0")
-    return null 
-  } else {
-    return (
-      <BaseLayout>
-        <BasePage>
-          <h1>I am secret {session.user.name}
-            {
-
-            }
           </h1>
-        </BasePage>
-      </BaseLayout>
-    )
-  }
+        }
+      </BasePage>
+    </BaseLayout>
 
-
-
+  )
 }
-export default Secret
+export default withAuth(Secret)
