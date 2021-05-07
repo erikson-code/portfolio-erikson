@@ -1,13 +1,15 @@
 import BaseLayout from '../../components/layouts/BaseLayout'
 import BasePage from '../../components/BasePage'
 import { useGetData } from '../../actions'
-import { useRouter } from 'next/router'
+import axios from 'axios'
+const Portfolio = (req) => {
 
-const Portfolio = () => {
-    const router = useRouter()
-    const { data: portfolio, error, loading } = 
-    useGetData(router.query.id ? `/api/v1/posts/${router.query.id}`: null)
-    debugger
+    const { id } = req
+
+    const url = `http://localhost:3000/api/${id}`
+
+    const { data: portfolio, error, loading } = useGetData(url)
+
 
     return (
         <BaseLayout>
@@ -19,7 +21,7 @@ const Portfolio = () => {
                     <>
                         <h1>I am Portfolio Detail</h1>
                         <h1>{portfolio.title}</h1>
-                        <p>Body:{portfolio.body}</p>
+                        <p>Body: {portfolio.body}</p>
                         <p>{portfolio.id}</p>
                     </>
                 }
@@ -31,6 +33,15 @@ const Portfolio = () => {
 
 }
 
+Portfolio.getInitialProps = async ({ query }) => {
+
+    const { id } = query
+
+
+    return { id }
+
+
+}
 
 
 
