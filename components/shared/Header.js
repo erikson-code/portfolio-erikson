@@ -14,7 +14,7 @@ import {
 const BsNavLink = props => {
 
 
-  const { href, title } = props;
+  const { href, title} = props;
   return (
     <Link href={href}>
       <a className="nav-link port-navbar-link">{title}</a>
@@ -23,7 +23,7 @@ const BsNavLink = props => {
 }
 
 
-const Header = () => {
+const Header = ({className}) => {
 
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false);
@@ -59,8 +59,7 @@ const Header = () => {
   return (
     <div>
       <Navbar
-        className="port-navbar port-default absolute"
-        color="transparent"
+        className={`port-navbar port-default absolute ${className}`}
         dark
         expand="md">
         <div className="navbar-brand">

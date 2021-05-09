@@ -6,11 +6,13 @@ import Typed from 'react-typed'
 const roles = ["Developer", "TI", "React JS", "Angular"]
 
 const Index = () => {
-  
+
   //const {Dados,error} = meusDados()
 
   return (
-    <BaseLayout  className="cover">
+    <BaseLayout
+      navClass="transparent"
+      className="cover">
       <div className="main-section">
         <div className="background-image">
           <img src="/images/background-index.png" />

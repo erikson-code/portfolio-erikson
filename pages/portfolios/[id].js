@@ -1,29 +1,14 @@
 import BaseLayout from '../../components/layouts/BaseLayout'
 import BasePage from '../../components/BasePage'
-import { useGetData } from '../../actions'
-import axios from 'axios'
-const Portfolio = (req) => {
-
-    const { id } = req
-
-    const url = `http://localhost:3000/api/${id}`
-
-    const { data: portfolio, error, loading } = useGetData(url)
+import PortfoliosApi from '../../lib/api/portfolios'
+const Portfolio = ({portfolio}) => {
 
 
     return (
         <BaseLayout>
-            <BasePage>
-                {loading && <p>Loading page ...</p>}
-                {error && <div className="alert alert-danger">{error.message}</div>}
-
-                {portfolio &&
-                    <>
-                        <h1>I am Portfolio Detail</h1>
-                        <h1>{portfolio.title}</h1>
-                        <p>Body: {portfolio.body}</p>
-                        <p>{portfolio.id}</p>
-                    </>
+            <BasePage header="Portfolio Detail">
+                {
+                    JSON.stringify(portfolio)
                 }
             </BasePage>
         </BaseLayout>
@@ -33,16 +18,15 @@ const Portfolio = (req) => {
 
 }
 
-Portfolio.getInitialProps = async ({ query }) => {
-
-    const { id } = query
-
-
-    return { id }
+export async function getServerSideProps({query}){
+    const json = await new PortfoliosApi().getById(query.id)
+    const portfolio = json.data
 
 
+    return {
+        props:{portfolio}
+    }
 }
-
 
 
 export default Portfolio

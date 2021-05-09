@@ -1,7 +1,7 @@
 @import "./shared/fonts";
 @import './index';
 @import "./components/header";
-
+@import "./portfolios";
 
 html,
 body {
@@ -26,7 +26,19 @@ body {
 .base-page{
 
   padding-top: 150px;
-  color:white
+  color:black;
+  background-color: #ecedee;
+  min-height: 100vh;
+
+  .page-header-title{
+
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+
+  }
+  
 
 }
 .clickable{
