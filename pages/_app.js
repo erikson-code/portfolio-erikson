@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import "../styles/main.scss"
 import { Provider } from 'next-auth/client'
+import 'react-datepicker/dist/react-datepicker.css'
 
 function MyApp({ Component, pageProps }) {
   return (

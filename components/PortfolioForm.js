@@ -1,12 +1,30 @@
-import { useForm } from 'react-hook-form'
-const PortfolioForm = () => {
+import { FormProvider, useForm } from 'react-hook-form'
+import DatePicker from 'react-datepicker'
+import { useState, useEffect } from 'react'
 
-    const { register, handleSubmit } = useForm()
-    const submit = (data) => 
-        alert(JSON.stringify(data))
+const PortfolioForm = ({ onSubmit }) => {
+
+    const { register, handleSubmit, watch, setValue } = useForm()
+    const startDate = watch('startDate')
+    const endDate = watch('endDate')
+    
+
+    const handleDateChange = dateType => date => {
+        setValue(dateType, date)
+        //alert(dateType+" "+ date)
+    }
+
+    useEffect(() => {
+        register("startDate", { required: true });
+        register("endDate", { required: true });
+
+    }, [register])
+
+
+
 
     return (
-        <form onSubmit={handleSubmit(submit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
                 <label htmlFor="title">Title</label>
                 <input
@@ -29,7 +47,7 @@ const PortfolioForm = () => {
                 <label htmlFor="city">Company Website</label>
                 <input
                     {...register("companyWebsite")}
-                    
+
                     type="text"
                     className="form-control"
                     id="companyWebsite" />
@@ -48,7 +66,7 @@ const PortfolioForm = () => {
                 <label htmlFor="street">Job Title</label>
                 <input
                     {...register("jobTitle")}
-                 
+
                     type="text"
                     className="form-control"
                     id="jobTitle" />
@@ -57,7 +75,7 @@ const PortfolioForm = () => {
             <div className="form-group">
                 <label htmlFor="description">Description</label>
                 <textarea
-                    name="description"
+                 {...register("description")}
                     rows="5"
                     type="text"
                     className="form-control"
@@ -68,19 +86,34 @@ const PortfolioForm = () => {
             <div className="form-group">
                 <label htmlFor="startDate">Start Date</label>
                 <div>
-                    {/* Date picker here */}
+                    <DatePicker
+                        showYearDropdown
+                        onChange={handleDateChange('startDate')}
+                        selected={startDate}
+                    />
                 </div>
             </div>
 
             <div className="form-group">
                 <label htmlFor="endDate">End Date</label>
                 <div>
-                    {/* Date picker here */}
+                    <DatePicker
+                        showYearDropdown
+                        onChange={handleDateChange('endDate')}
+                        selected={endDate}
+                    />
                 </div>
             </div>
+
+            <div className="form-group">
+                
+            </div>
+
             <button
+           
                 type="submit"
                 className="btn btn-primary">Create
+                
 </button>
         </form>
 

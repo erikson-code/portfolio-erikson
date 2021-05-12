@@ -8,7 +8,6 @@ const postsID = async (req, res) => {
     
      const dataRes = await data.data
 
-    console.log(dataRes)
     res.send(dataRes)
 
 
