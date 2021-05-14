@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "dev-debug": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
-    "start": "next dev"
+    "start-dev": "cross-env NODE_ENV=production node server.js",
+    "start":"next dev"
   },
   "dependencies": {
     "axios": "^0.21.1",
