@@ -3,8 +3,8 @@ import BasePage from 'components/BasePage'
 
 import withAuth from '../hoc'
 
-const Secret = ({user,loading}) => {
-  debugger
+const Secret = ({user}) => {
+
   return (
     <BaseLayout>
       <BasePage>

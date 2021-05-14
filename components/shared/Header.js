@@ -14,6 +14,7 @@ import {
   DropdownItem
 } from 'reactstrap';
 
+import ReactResizeDetector from 'react-resize-detector'
 
 
 const BsNavLink = props => {
@@ -62,15 +63,15 @@ const Header = ({ className }) => {
   }
 
   const AdminMenu = () => {
-    const [isOpen,setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
     return (
 
       <Dropdown
         className="port-navbar-link port-dropdown-menu"
         nav
         isOpen={isOpen}
-        toggle={() => {setIsOpen(!isOpen) }}
-        
+        toggle={() => { setIsOpen(!isOpen) }}
+
       >
         <DropdownToggle className="port-dropdown-toggle" nav caret>
           Admin
@@ -91,70 +92,76 @@ const Header = ({ className }) => {
 
 
   return (
-    <div>
-      <Navbar
-        className={`port-navbar port-default absolute ${className}`}
-        dark
-        expand="md">
-        <div className="navbar-brand">
-          <Link href="/">
-            <a className="port-navbar-brand">
-              {session == undefined ? "" : session.user.name
+    <ReactResizeDetector  handleWidth>
+      {({width}) =>
 
-              }</a>
-          </Link>
-        </div>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            <NavItem className="port-navbar-item">
-              <BsNavLink href="/" title="Home" />
-            </NavItem>
+        <Navbar
+          className={`port-navbar port-default absolute ${className}
+        ${width <768 && isOpen ? 'is-open' : 'is-close'}`}
+          dark
+          expand="md">
+          <div className="navbar-brand">
+            
+            <Link href="/">
+              <a className="port-navbar-brand">
+                {session == undefined ? "" : session.user.name
 
-            <NavItem className="port-navbar-item">
-              <BsNavLink href="/about" title="About" />
-            </NavItem>
-            <NavItem className="port-navbar-item">
-              <BsNavLink href="/portfolios" title="Portfolios" />
-            </NavItem>
-            <NavItem className="port-navbar-item">
-              <BsNavLink href="/blogs" title="Blogs" />
-            </NavItem>
-            <NavItem className="port-navbar-item">
-              <BsNavLink href="/cv" title="Cv" />
-            </NavItem>
+                }</a>
+            </Link>
+          </div>
+          <NavbarToggler onClick={toggle} />
+          <Collapse isOpen={isOpen} navbar>
+            <Nav className="mr-auto" navbar>
+              <NavItem className="port-navbar-item">
+                <BsNavLink href="/" title="Home" />
+              </NavItem>
 
-            <NavItem className="port-navbar-item">
-              <BsNavLink href="/secret" title="Secret" />
-            </NavItem>
+              <NavItem className="port-navbar-item">
+                <BsNavLink href="/about" title="About" />
+              </NavItem>
+              <NavItem className="port-navbar-item">
+                <BsNavLink href="/portfolios" title="Portfolios" />
+              </NavItem>
+              <NavItem className="port-navbar-item">
+                <BsNavLink href="/blogs" title="Blogs" />
+              </NavItem>
+              <NavItem className="port-navbar-item">
+                <BsNavLink href="/cv" title="Cv" />
+              </NavItem>
 
-
-
-
-          </Nav>
-
-          {!session && <>
-
-            <NavItem className="port-navbar-item">
-              <LoginLink onClick={() => signIn("auth0")}></LoginLink>
-            </NavItem>
-          </>}
-          {session && <>
-            <AdminMenu></AdminMenu>
-            <NavItem className="port-navbar-item">
-              <LoginOut onClick={() => signOut()}></LoginOut>
-            </NavItem>
-          </>}
+              <NavItem className="port-navbar-item">
+                <BsNavLink href="/secret" title="Secret" />
+              </NavItem>
 
 
 
 
+            </Nav>
+
+            {!session && <>
+
+              <NavItem className="port-navbar-item">
+                <LoginLink onClick={() => signIn("auth0")}></LoginLink>
+              </NavItem>
+            </>}
+            {session && <>
+              <AdminMenu></AdminMenu>
+              <NavItem className="port-navbar-item">
+                <LoginOut onClick={() => signOut()}></LoginOut>
+              </NavItem>
+            </>}
 
 
 
-        </Collapse>
-      </Navbar>
-    </div>
+
+
+
+
+          </Collapse>
+        </Navbar>
+      }
+    </ReactResizeDetector>
+
   );
 }
 export default Header
