@@ -1,17 +1,31 @@
-import { FormProvider, useForm } from 'react-hook-form'
+import {useForm } from 'react-hook-form'
 import DatePicker from 'react-datepicker'
-import { useState, useEffect } from 'react'
+import {  useEffect } from 'react'
 
-const PortfolioForm = ({ onSubmit }) => {
+const PortfolioForm = ({ onSubmit ,initalData = {}}) => {
+    
+    const { register, handleSubmit, watch, setValue } = useForm(
+      
+        {defaultValues:{
+            title: initalData && initalData.title,
+            startDate: initalData.startDate &&( new Date(initalData.startDate || null)) ,
+            endDate:initalData.endDate &&( new Date(initalData.endDate || null)) ,
+            company:initalData && (initalData.company),
+            companyWebsite:initalData && (initalData.companyWebsite),
+            location: initalData && (initalData.location),
+            description: initalData && (initalData.description),
+            jobTitle: initalData && (initalData.jobTitle)
+            
 
-    const { register, handleSubmit, watch, setValue } = useForm()
+        }}
+
+    )
     const startDate = watch('startDate')
     const endDate = watch('endDate')
     
 
     const handleDateChange = dateType => date => {
         setValue(dateType, date)
-        //alert(dateType+" "+ date)
     }
 
     useEffect(() => {
@@ -20,7 +34,7 @@ const PortfolioForm = ({ onSubmit }) => {
 
     }, [register])
 
-
+  
 
 
     return (

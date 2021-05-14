@@ -7,23 +7,28 @@ import {
   Navbar,
   NavbarToggler,
   Nav,
-  NavItem
+  NavItem,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
 } from 'reactstrap';
+
 
 
 const BsNavLink = props => {
 
 
-  const { href, title} = props;
+  const { href, title, className = "" } = props;
   return (
     <Link href={href}>
-      <a className="nav-link port-navbar-link">{title}</a>
+      <a className={`${className} nav-link port-navbar-link`}>{title}</a>
     </Link>
   )
 }
 
 
-const Header = ({className}) => {
+const Header = ({ className }) => {
 
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +45,7 @@ const Header = ({className}) => {
         onClick={() => {
 
           router.push("/")
-            .then(()=>onClick())
+            .then(() => onClick())
 
         }
         }>Logout</a>
@@ -55,6 +60,35 @@ const Header = ({className}) => {
     )
 
   }
+
+  const AdminMenu = () => {
+    const [isOpen,setIsOpen] = useState(false)
+    return (
+
+      <Dropdown
+        className="port-navbar-link port-dropdown-menu"
+        nav
+        isOpen={isOpen}
+        toggle={() => {setIsOpen(!isOpen) }}
+        
+      >
+        <DropdownToggle className="port-dropdown-toggle" nav caret>
+          Admin
+        </DropdownToggle>
+
+        <DropdownMenu right>
+          <DropdownItem>
+            <BsNavLink className=
+              "port-dropdown-item"
+              href="/portfolios/new"
+              title="Create Portfolio" />
+          </DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+
+    )
+  }
+
 
   return (
     <div>
@@ -100,11 +134,13 @@ const Header = ({className}) => {
           </Nav>
 
           {!session && <>
+
             <NavItem className="port-navbar-item">
               <LoginLink onClick={() => signIn("auth0")}></LoginLink>
             </NavItem>
           </>}
           {session && <>
+            <AdminMenu></AdminMenu>
             <NavItem className="port-navbar-item">
               <LoginOut onClick={() => signOut()}></LoginOut>
             </NavItem>

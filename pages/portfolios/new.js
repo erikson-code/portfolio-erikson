@@ -3,7 +3,6 @@ import BasePage from '../../components/BasePage'
 import {  Row, Col } from 'reactstrap';
 import PortfolioForm from '../../components/PortfolioForm'
 import {useCreatePortfolio} from '../../actions/portfolios'
-import Redirect from '../../components/shared/Redirect'
 import {useRouter} from 'next/router'
 
 const PortfolioNew = () => {

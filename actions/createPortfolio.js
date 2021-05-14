@@ -26,6 +26,7 @@ export function useApiHandler(apiCall) {
 
             }else{
                 setReqState({ error: null, data: json.data, loading: false })
+                return json.data
             }
 
 
@@ -36,6 +37,8 @@ export function useApiHandler(apiCall) {
             const message = (e.response && e.response.message) || 'Ops, something is wrong...'
 
             setReqState({ error: message, data: null, loading: false })
+
+            return Promise.reject(message)
 
         }
     }

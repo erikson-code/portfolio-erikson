@@ -1,6 +1,6 @@
 
-import PortfoliosApi from '../../lib/api/portfolios'
-import axios from 'axios'
+import PortfoliosApi from '../../../lib/api/portfolios'
+
 export default async function createPortfolios(req, res) {
 
 
@@ -15,4 +15,3 @@ export default async function createPortfolios(req, res) {
         return res.status(e.status || 422).json(e.response.data)
     }
 }
-

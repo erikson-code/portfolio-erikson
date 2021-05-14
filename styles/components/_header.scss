@@ -1,4 +1,5 @@
 // HEADER
+
 .port-navbar.port-default {
   width: 100%;
   z-index: 15;
@@ -35,6 +36,20 @@
       &:focus {
         color: #dba919;
       }
+    }
+  }
+  .port-dropdown-menu {
+    .port-dropdown-item {
+      color: #4e4e4e;
+
+      &.active {
+        color: #dba919;
+      }
+    }
+    .port-dropdown-toggle {
+      color: white;
+      margin-left: 10px;
+      margin-right: 10px;
     }
   }
 }

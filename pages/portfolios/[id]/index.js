@@ -1,6 +1,6 @@
-import BaseLayout from '../../components/layouts/BaseLayout'
-import BasePage from '../../components/BasePage'
-import PortfoliosApi from '../../lib/api/portfolios'
+import BaseLayout from '../../../components/layouts/BaseLayout'
+import BasePage from '../../../components/BasePage'
+import PortfoliosApi from '../../../lib/api/portfolios'
 const Portfolio = ({ portfolio }) => {
 
 
