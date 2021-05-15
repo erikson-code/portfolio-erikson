@@ -41,7 +41,7 @@ export async function getStaticProps({params}){
     const json = await new  PortfoliosApi().getById(params.id)
 
     const portfolio = json.data
-    return {props: {portfolio},unstable_revalidate:60}
+    return {props: {portfolio}}
 
 }
 
