@@ -45,7 +45,7 @@ const Portfolio = ({ portfolios:initialPortfolios }) => {
                             key={portfolio._id}>
                             <PortfolioCard portfolio={portfolio}>
                                 {
-                                    session &&
+                                    !session &&
                                     <>
                                         <Button
                                             className="mr-2"
