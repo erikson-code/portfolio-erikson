@@ -8,21 +8,21 @@ const roles = ["Developer", "TI", "React JS", "Angular"]
 
 const Index = () => {
 
-  const [isFlipping,setIsFlipping] = useState(true)
-  const flipInterval = useRef()
+  // const [isFlipping,setIsFlipping] = useState(true)
+  // const flipInterval = useRef()
 
-  useEffect(()=>{
-    animaterCard();
+  // useEffect(()=>{
+  //   animaterCard();
 
-    return ()=> flipInterval.current && clearInterval(flipInterval.current)
-  },[])
+  //   return ()=> flipInterval.current && clearInterval(flipInterval.current)
+  // },[])
 
-  const animaterCard = ()=>{
-    flipInterval.current =  setInterval(()=>{
+  // const animaterCard = ()=>{
+  //   flipInterval.current =  setInterval(()=>{
 
-      setIsFlipping(prevFliping => !prevFliping)
-    },10000)
-  }
+  //     setIsFlipping(prevFliping => !prevFliping)
+  //   },10000)
+  // }
  
 
   return (
